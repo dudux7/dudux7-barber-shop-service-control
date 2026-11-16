@@ -2,6 +2,7 @@
 import Client from "./Client";
 import Barber from "./Barber";
 import Service from "./Service";
+import { AttendanceStatus } from "./ AttendanceStatus";
 
 export default class Attendance {
 
@@ -9,6 +10,7 @@ export default class Attendance {
     //toda vez que o constructor roda, ele incrementa Attendance.contador++ e usa o valor novo como id.
     //isso garante que o id de cada atendimento é único
     private static contador: number = 0;
+    private status: AttendanceStatus;
 
     private id: number;
     private client: Client;
@@ -21,6 +23,7 @@ export default class Attendance {
         barber: Barber,
         services: Service[],
         date: Date
+        
     ) {
         if (services.length === 0) {
             //Se o array de serviços estiver vazio, ele lança um erro e não permite criar o atendimento
@@ -33,6 +36,8 @@ export default class Attendance {
         this.barber = barber;
         this.services = services;
         this.date = date;
+        this.status = AttendanceStatus.SCHEDULED;
+        
     }
 
     public getId(): number {
@@ -67,8 +72,8 @@ export default class Attendance {
         //return sum;
     }
 
-     public static calculateTotal(services: Service[]): number {
-        return services.reduce((soma, servico) => soma + servico.getPrice(), 0);
+     public static TotalPrice(services: Service[]): number {
+        return services.reduce((sum, service) => sum + service.getPrice(), 0);
     }
 
     // valida se a string digitada vira uma data real
@@ -83,4 +88,23 @@ export default class Attendance {
         const ano = date.getFullYear();
         return `${dia}/${mes}/${ano}`;
     }
+
+    public getStatus(): AttendanceStatus {
+        return this.status;
+    }
+
+    public complete(): void {
+        if (this.status === AttendanceStatus.CANCELED) {
+            throw new Error("Não é possível concluir um atendimento cancelado.");
+        }
+        this.status = AttendanceStatus.COMPLETED;
+    }
+
+    public cancel(): void {
+        if (this.status === AttendanceStatus.COMPLETED) {
+            throw new Error("Não é possível cancelar um atendimento concluído.");
+        }
+        this.status = AttendanceStatus.CANCELED;
+    }
+
 }

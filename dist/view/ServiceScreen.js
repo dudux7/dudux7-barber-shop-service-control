@@ -4,8 +4,8 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 // view/ServiceScreen.ts
-const Screen_1 = __importDefault(require("./Screen"));
-class ServiceScreen extends Screen_1.default {
+const EntityScreen_1 = __importDefault(require("./EntityScreen"));
+class ServiceScreen extends EntityScreen_1.default {
     register() {
         const name = this.prompt("Digite o nome do Serviço: ");
         const price = Number(this.prompt("Digite o preço do Serviço: "));

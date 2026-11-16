@@ -1,8 +1,8 @@
 // view/ServiceScreen.ts
-import Screen from "./Screen";
+import EntityScreen from "./EntityScreen";
 import Service from "../model/Service";
 
-export default class ServiceScreen extends Screen {
+export default class ServiceScreen extends EntityScreen {
 
     public register(): void {
         const name = this.prompt("Digite o nome do Serviço: ");
@@ -18,9 +18,7 @@ export default class ServiceScreen extends Screen {
             return;
         }
 
-        this.controller.services.listAll().forEach((s, index) => {
-            console.log(`${index + 1}. ${s.getName()} - R$${s.getPrice()}`);
-        });
+        this.printList(this.controller.services.listAll());
     }
 
     // permite escolher VÁRIOS serviços, ex: 1,3

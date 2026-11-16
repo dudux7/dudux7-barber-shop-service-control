@@ -18,6 +18,9 @@ class Person {
     setName(name) {
         this.name = name;
     }
+    getInfo() {
+        return `${this.getName()} (#${this.getId()})`;
+    }
 }
 //static para criar um contador de ids
 //toda vez que o constructor roda, ele incrementa Pessoa.contador++ e usa o valor novo como id.

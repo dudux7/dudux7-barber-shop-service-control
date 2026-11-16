@@ -33,7 +33,7 @@ export default class MainScreen extends Screen {
     private open(): void {
         let option: number = 0;
 
-        while (option !== 9) {
+        while (option !== 10) {
             console.clear();
             option = Number(this.prompt(
                 "DIGITE:\n" +
@@ -45,7 +45,8 @@ export default class MainScreen extends Screen {
                 "6. Listar Barbeiros\n" +
                 "7. Listar Serviços\n" +
                 "8. Listar Atendimentos\n" +
-                "9. Sair\n"
+                "9. Alterar Status do Atendimento\n" +
+                "10. Sair\n"
             ));
 
             // try/catch no menu: se qualquer tela lançar erro
@@ -61,8 +62,9 @@ export default class MainScreen extends Screen {
                     case 6: this.barberScreen.list(); break;
                     case 7: this.serviceScreen.list(); break;
                     case 8: this.attendanceScreen.list(); break;
-                    case 9: console.log("Saindo..."); continue;
-                    default: console.log("Entre com um número entre 1 e 9");
+                    case 9: this.attendanceScreen.changeStatus(); break;
+                    case 10: console.log("Saindo..."); continue;
+                    default: console.log("Entre com um número entre 1 e 10");
                 }
             } catch (erro) {
                 console.log(`Erro: ${(erro as Error).message}`);

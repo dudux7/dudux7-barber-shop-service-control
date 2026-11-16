@@ -16,5 +16,8 @@ class Barber extends Person_1.default {
     setPhone(phone) {
         this.phone = phone;
     }
+    getInfo() {
+        return `${super.getInfo()} - Tel: ${this.getPhone()} (Barbeiro)`;
+    }
 }
 exports.default = Barber;

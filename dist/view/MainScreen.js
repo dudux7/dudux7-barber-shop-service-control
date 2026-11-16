@@ -21,7 +21,7 @@ class MainScreen extends Screen_1.default {
     }
     open() {
         let option = 0;
-        while (option !== 9) {
+        while (option !== 10) {
             console.clear();
             option = Number(this.prompt("DIGITE:\n" +
                 "1. Cadastrar Cliente\n" +
@@ -32,7 +32,8 @@ class MainScreen extends Screen_1.default {
                 "6. Listar Barbeiros\n" +
                 "7. Listar Serviços\n" +
                 "8. Listar Atendimentos\n" +
-                "9. Sair\n"));
+                "9. Alterar Status do Atendimento\n" +
+                "10. Sair\n"));
             // try/catch no menu: se qualquer tela lançar erro
             // (nome de serviço repetido, lista vazia, etc.)
             // o programa avisa e volta pro menu em vez de quebrar.
@@ -63,9 +64,12 @@ class MainScreen extends Screen_1.default {
                         this.attendanceScreen.list();
                         break;
                     case 9:
+                        this.attendanceScreen.changeStatus();
+                        break;
+                    case 10:
                         console.log("Saindo...");
                         continue;
-                    default: console.log("Entre com um número entre 1 e 9");
+                    default: console.log("Entre com um número entre 1 e 10");
                 }
             }
             catch (erro) {

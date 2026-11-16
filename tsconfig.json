@@ -6,5 +6,7 @@
     //"strict": true
     "outDir": "./dist",
     "rootDir": "./src",
-  }
+  },
+  // os testes não entram no build (dist)
+  "exclude": ["src/tests", "node_modules", "dist"]
 }

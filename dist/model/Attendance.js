@@ -1,5 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
+const _AttendanceStatus_1 = require("./ AttendanceStatus");
 class Attendance {
     constructor(client, barber, services, date) {
         if (services.length === 0) {
@@ -12,6 +13,7 @@ class Attendance {
         this.barber = barber;
         this.services = services;
         this.date = date;
+        this.status = _AttendanceStatus_1.AttendanceStatus.SCHEDULED;
     }
     getId() {
         return this.id;
@@ -38,8 +40,8 @@ class Attendance {
         //}
         //return sum;
     }
-    static calculateTotal(services) {
-        return services.reduce((soma, servico) => soma + servico.getPrice(), 0);
+    static TotalPrice(services) {
+        return services.reduce((sum, service) => sum + service.getPrice(), 0);
     }
     // valida se a string digitada vira uma data real
     static isValidDate(date) {
@@ -51,6 +53,21 @@ class Attendance {
         const mes = String(date.getMonth() + 1).padStart(2, "0"); // mês começa em 0
         const ano = date.getFullYear();
         return `${dia}/${mes}/${ano}`;
+    }
+    getStatus() {
+        return this.status;
+    }
+    complete() {
+        if (this.status === _AttendanceStatus_1.AttendanceStatus.CANCELED) {
+            throw new Error("Não é possível concluir um atendimento cancelado.");
+        }
+        this.status = _AttendanceStatus_1.AttendanceStatus.COMPLETED;
+    }
+    cancel() {
+        if (this.status === _AttendanceStatus_1.AttendanceStatus.COMPLETED) {
+            throw new Error("Não é possível cancelar um atendimento concluído.");
+        }
+        this.status = _AttendanceStatus_1.AttendanceStatus.CANCELED;
     }
 }
 //static para criar um contador de ids

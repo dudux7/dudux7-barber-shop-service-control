@@ -1,8 +1,8 @@
 // view/BarberScreen.ts
-import Screen from "./Screen";
+import EntityScreen from "./EntityScreen";
 import Barber from "../model/Barber";
 
-export default class BarberScreen extends Screen {
+export default class BarberScreen extends EntityScreen {
 
     public register(): void {
         const name = this.prompt("Digite o nome do Barbeiro: ");
@@ -18,9 +18,7 @@ export default class BarberScreen extends Screen {
             return;
         }
 
-        this.controller.barbers.listAll().forEach((b, index) => {
-            console.log(`${index + 1}. ${b.getName()} - ${b.getPhone()}`);
-        });
+        this.printList(this.controller.barbers.listAll());
     }
 
     public select(): Barber {

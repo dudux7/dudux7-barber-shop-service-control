@@ -4,8 +4,8 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 // view/BarberScreen.ts
-const Screen_1 = __importDefault(require("./Screen"));
-class BarberScreen extends Screen_1.default {
+const EntityScreen_1 = __importDefault(require("./EntityScreen"));
+class BarberScreen extends EntityScreen_1.default {
     register() {
         const name = this.prompt("Digite o nome do Barbeiro: ");
         const phone = this.prompt("Digite o telefone do Barbeiro: ");
@@ -18,7 +18,7 @@ class BarberScreen extends Screen_1.default {
             return;
         }
         this.controller.barbers.listAll().forEach((b, index) => {
-            console.log(`${index + 1}. ${b.getName()} - ${b.getPhone()}`);
+            console.log(`${index + 1}. ${b.getInfo()}`);
         });
     }
     select() {

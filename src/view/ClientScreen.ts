@@ -1,9 +1,9 @@
 // view/ClientScreen.ts
 // Tudo que é TELA de cliente mora aqui.
-import Screen from "./Screen";
+import EntityScreen from "./EntityScreen";
 import Client from "../model/Client";
 
-export default class ClientScreen extends Screen {
+export default class ClientScreen extends EntityScreen {
 
     public register(): void {
         const name = this.prompt("Digite o nome do Cliente: ");
@@ -19,12 +19,11 @@ export default class ClientScreen extends Screen {
             return;
         }
 
-        this.controller.clients.listAll().forEach((c, index) => {
-            console.log(`${index + 1}. ${c.getName()} - ${c.getPhone()}`);
-        });
+        this.printList(this.controller.clients.listAll());
     }
 
-    // usado pela tela de atendimento
+    //usado pela tela de atendimento
+    //permite escolher um cliente do array de clientes
     public select(): Client {
         if (this.controller.clients.isEmpty()) {
             throw new Error("Não há clientes para selecionar");

@@ -2,27 +2,32 @@
 // Agora ele NÃO cadastra nada direto. Ele só cria o Database
 // e distribui esse mesmo Database para os controllers específicos.
 import Database from "../databases/Database";
+import ClientService from "../service/ClientService";
+import BarberService from "../service/BarberService";
+import ItemService from "../service/ItemService";
+import AttendanceService from "../service/AttendanceService";
 import ClientController from "./ClientController";
 import BarberController from "./BarberController";
 import ServiceController from "./ServiceController";
 import AttendanceController from "./AttendanceController";
 
 export default class MainController {
-
-    public database: Database;
-
     public clients: ClientController;
     public barbers: BarberController;
     public services: ServiceController;
     public attendances: AttendanceController;
 
     constructor() {
-        this.database = new Database();
+        const database = new Database();
 
-        // todos recebem O MESMO Database, então compartilham os dados
-        this.clients = new ClientController(this.database);
-        this.barbers = new BarberController(this.database);
-        this.services = new ServiceController(this.database);
-        this.attendances = new AttendanceController(this.database);
+        const clientService = new ClientService(database);
+        const barberService = new BarberService(database);
+        const itemService = new ItemService(database);
+        const attendanceService = new AttendanceService(database);
+
+        this.clients = new ClientController(clientService);
+        this.barbers = new BarberController(barberService);
+        this.services = new ServiceController(itemService);
+        this.attendances = new AttendanceController(attendanceService);
     }
 }

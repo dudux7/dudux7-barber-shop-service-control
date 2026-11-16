@@ -1,5 +1,7 @@
 // model/Servico.ts
-export default class Service {
+import Describable from "./Describable";
+
+export default class Service implements Describable {
 
     //funciona como uma "lista de nomes já usados" compartilhada entre todas as instâncias de Servico
     //isso garante que o nome de um serviço não seja usado mais de uma vez
@@ -33,5 +35,10 @@ export default class Service {
 
     public setPrice(price: number): void {
         this.price = price;
+    }
+
+    // método exigido pela interface Describable
+    public getInfo(): string {
+        return `${this.name} - R$${this.price}`;
     }
 }

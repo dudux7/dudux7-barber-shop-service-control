@@ -1,23 +1,26 @@
 "use strict";
-var __importDefault = (this && this.__importDefault) || function (mod) {
-    return (mod && mod.__esModule) ? mod : { "default": mod };
-};
 Object.defineProperty(exports, "__esModule", { value: true });
-const Attendance_1 = __importDefault(require("../model/Attendance"));
 class AttendanceController {
-    constructor(database) {
-        this.database = database;
+    constructor(attendanceService) {
+        this.attendanceService = attendanceService;
     }
     register(client, barber, services, date) {
-        const attendance = new Attendance_1.default(client, barber, services, date);
-        this.database.attendances.push(attendance);
-        return attendance;
+        if (date !== undefined) {
+            return this.attendanceService.register(client, barber, services, date);
+        }
+        return this.attendanceService.register(client, barber, services);
     }
     listAll() {
-        return this.database.attendances;
+        return this.attendanceService.listAll();
+    }
+    complete(id) {
+        return this.attendanceService.complete(id);
+    }
+    cancel(id) {
+        return this.attendanceService.cancel(id);
     }
     isEmpty() {
-        return this.database.attendances.length === 0;
+        return this.attendanceService.isEmpty();
     }
 }
 exports.default = AttendanceController;

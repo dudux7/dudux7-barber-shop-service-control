@@ -1,5 +1,7 @@
 //Classe Pessoa
-export default class Person {
+import Describable from "./Describable";
+
+export default class Person implements Describable {
     //static para criar um contador de ids
     //toda vez que o constructor roda, ele incrementa Pessoa.contador++ e usa o valor novo como id.
     //isso garante que o id de cada pessoa é único
@@ -26,5 +28,9 @@ export default class Person {
     }
     public setName(name: string): void {
         this.name = name;
+    }
+
+    public getInfo(): string {
+        return `${this.getName()} (#${this.getId()})`;
     }
 }

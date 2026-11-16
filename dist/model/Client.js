@@ -16,5 +16,8 @@ class Client extends Person_1.default {
     setPhone(phone) {
         this.phone = phone;
     }
+    getInfo() {
+        return `${super.getInfo()} - Tel: ${this.getPhone()}`;
+    }
 }
 exports.default = Client;

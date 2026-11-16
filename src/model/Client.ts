@@ -17,4 +17,8 @@ export default class Client extends Person {
     public setPhone(phone: string): void {
         this.phone = phone;
     }
+
+    public override getInfo(): string {
+        return `${super.getInfo()} - Tel: ${this.getPhone()}`;
+    }
 }

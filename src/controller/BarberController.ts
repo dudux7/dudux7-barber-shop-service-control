@@ -1,27 +1,24 @@
-// controller/BarberController.ts
-// Responsável SÓ por barbeiro.
-import Database from "../databases/Database";
+import BarberService from "../service/BarberService";
 import Barber from "../model/Barber";
 
 export default class BarberController {
 
-    private database: Database;
+    private barberService: BarberService;
 
-    constructor(database: Database) {
-        this.database = database;
+    constructor(barberService: BarberService) {
+        this.barberService = barberService;
     }
 
-    public register(name: string, phone: string): Barber {
-        const barber = new Barber(name, phone);
-        this.database.barbers.push(barber);
-        return barber;
+    public register(name: string, phone: string): void {
+        this.barberService.register(name, phone);
+        //return this.barberService.register(name, phone);
     }
 
     public listAll(): Barber[] {
-        return this.database.barbers;
+        return this.barberService.listAll();
     }
 
     public isEmpty(): boolean {
-        return this.database.barbers.length === 0;
+        return this.barberService.isEmpty();
     }
 }

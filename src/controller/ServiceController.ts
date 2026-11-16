@@ -1,27 +1,23 @@
-// controller/ServiceController.ts
-// Responsável SÓ por serviço.
-import Database from "../databases/Database";
+import ItemService from "../service/ItemService";
 import Service from "../model/Service";
 
 export default class ServiceController {
 
-    private database: Database;
+    private itemService: ItemService;
 
-    constructor(database: Database) {
-        this.database = database;
+    constructor(itemService: ItemService) {
+        this.itemService = itemService;
     }
 
-    public register(name: string, price: number): Service {
-        const service = new Service(name, price);
-        this.database.services.push(service);
-        return service;
+   public register(name: string, price: number): void {
+        this.itemService.register(name, price);
     }
 
     public listAll(): Service[] {
-        return this.database.services;
+        return this.itemService.listAll();
     }
 
     public isEmpty(): boolean {
-        return this.database.services.length === 0;
+        return this.itemService.isEmpty();
     }
 }

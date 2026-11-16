@@ -1,23 +1,18 @@
 "use strict";
-var __importDefault = (this && this.__importDefault) || function (mod) {
-    return (mod && mod.__esModule) ? mod : { "default": mod };
-};
 Object.defineProperty(exports, "__esModule", { value: true });
-const Barber_1 = __importDefault(require("../model/Barber"));
 class BarberController {
-    constructor(database) {
-        this.database = database;
+    constructor(barberService) {
+        this.barberService = barberService;
     }
     register(name, phone) {
-        const barber = new Barber_1.default(name, phone);
-        this.database.barbers.push(barber);
-        return barber;
+        this.barberService.register(name, phone);
+        //return this.barberService.register(name, phone);
     }
     listAll() {
-        return this.database.barbers;
+        return this.barberService.listAll();
     }
     isEmpty() {
-        return this.database.barbers.length === 0;
+        return this.barberService.isEmpty();
     }
 }
 exports.default = BarberController;
